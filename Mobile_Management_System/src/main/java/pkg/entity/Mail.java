@@ -18,12 +18,5 @@ public class Mail {
 	 private   String toEmail;
 	 private   String subject;
 	 private    String content;
-	 Map<String, Object> model;
-   
-    
-    
-    
-   
- 
-    
+	 Map<String, Object> model;   
 }

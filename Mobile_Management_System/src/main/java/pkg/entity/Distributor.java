@@ -1,5 +1,6 @@
-package pkg.entity;
+/*package pkg.entity;
 
 public class Distributor {
 
 }
+*/

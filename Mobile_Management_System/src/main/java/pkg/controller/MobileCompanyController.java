@@ -27,13 +27,13 @@ import pkg.service.MobileCompanyService;
 import pkg.service.UserDetailsServiceImpl;
 
 @RestController
-@RequestMapping("/MobileCompany")
+@RequestMapping("/mobilecompany")
 public class MobileCompanyController {
 
 	@Autowired
 	private MobileCompanyService mobileCompanyService;
 	
-	@GetMapping
+	@GetMapping(value="/all")
 	@ResponseStatus(value = HttpStatus.OK)
     public List<MobileCompany>  getAllMobileCompanies() {
        return this.mobileCompanyService.getAllMobileCompanies(); 
@@ -41,7 +41,7 @@ public class MobileCompanyController {
     }
 	@PostMapping
 	@ResponseStatus(value=HttpStatus.OK)
-	public ResponseEntity<MobileCompany> createStadium(@RequestBody MobileCompanyDto mobileCompanyDto)throws Exception{
+	public ResponseEntity<MobileCompany> createMobileCompany(@RequestBody MobileCompanyDto mobileCompanyDto)throws Exception{
 		MobileCompany mobileCompany = this.mobileCompanyService.createMobileCompany(mobileCompanyDto);
 		return new ResponseEntity<>(mobileCompany,HttpStatus.CREATED);
 	}
@@ -58,8 +58,8 @@ public class MobileCompanyController {
 	        
 	    }
 	@PutMapping(value="/{id}")
-	public ResponseEntity<MobileCompany> update(@RequestBody MobileCompanyDto mobileCompany,@PathVariable int companyid) {
-		mobileCompany.setCompany_id(companyid);
+	public ResponseEntity<MobileCompany> update(@RequestBody MobileCompanyDto mobileCompany,@PathVariable int id) {
+		mobileCompany.setId(id);
 		return ResponseEntity.ok().body(mobileCompanyService.update(mobileCompany));
 		
 		}

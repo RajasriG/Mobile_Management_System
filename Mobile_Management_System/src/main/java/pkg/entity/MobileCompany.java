@@ -1,5 +1,6 @@
 package pkg.entity;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,11 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.ManyToAny;
 
@@ -27,7 +29,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="mobilecompanies")
+@Table(name="mobilecompany")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -38,8 +40,8 @@ public class MobileCompany
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mobilecompany_sequence")
 	@SequenceGenerator(name = "mobilecompany_sequence", sequenceName = "mobilecompany_sequence", allocationSize = 1)
 	
-	@Column(name = "company_id")
-	private int companyid;
+	@Column(name = "id")
+	private int id;
 	
 	@Column(name="company_name")
 	private String companyname;
@@ -50,11 +52,15 @@ public class MobileCompany
 	@Column(name="company_phno")
 	private int companyphno;
 	
-	@Column(name="company_email")
+	@Pattern(regexp ="^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$",message="mail id is not valid")
+	@NotEmpty
+	@Column(name="company_email",unique = true)
 	private String companyemail;
 	
-    @ManyToOne(fetch = FetchType.LAZY)
+
+	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn
-	@JsonIgnore
-	private User user;
+	private User user; 
+
+ 
 }

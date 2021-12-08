@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 public class UserDto {
 
-	private long id;
+	private int id;
     private String firstName;
     private String lastName;
     private String username;
@@ -19,7 +19,7 @@ public class UserDto {
 	@Override
 	public String toString() {
 		return "UserDto [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username
-				+ ", password=" + password + ", emailId=" + email + ", role=" + role + "]";
+				+ ", password=" + password + ", email=" + email + ", role=" + role + "]";
 	}
 
 }

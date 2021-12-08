@@ -102,28 +102,28 @@ public MobileCompany createMobileCompany(MobileCompanyDto userDto)throws Excepti
 	}
 	@Override
 	@Transactional(readOnly = true)
-	public MobileCompany findById(int companyid) {
+	public MobileCompany findById(int id) {
 		
-		Optional<MobileCompany> mob=this.mobileCompanyRepository.findById(companyid);
+		Optional<MobileCompany> mob=this.mobileCompanyRepository.findById(id);
 		if(mob.isPresent()) {
 			return mob.get();
 		}
 		
 		else {
-			throw  new RuntimeException("Record not found with companyid  :" +companyid);
+			throw  new RuntimeException("Record not found with companyid  :" +id);
 		}
 	}
 	@Override
 	@Transactional
-	public void deleteById(int companyid) {
+	public void deleteById(int id) {
 		
-		Optional<MobileCompany> mobile= this.mobileCompanyRepository.findById(companyid);
+		Optional<MobileCompany> mobile= this.mobileCompanyRepository.findById(id);
         if(mobile.isPresent()) {
 			
-        	this.mobileCompanyRepository.deleteById(companyid);
+        	this.mobileCompanyRepository.deleteById(id);
 		}
 		else {
-			throw new RuntimeException("Record not found with companyid  :" +companyid);
+			throw new RuntimeException("Record not found with companyid  :" +id);
 		}
 		
 	}
@@ -132,7 +132,7 @@ public MobileCompany createMobileCompany(MobileCompanyDto userDto)throws Excepti
 	public MobileCompany update(MobileCompanyDto mobileCompanyDto) 
 	{
 	
-        Optional<MobileCompany> mobileCompany=this.mobileCompanyRepository.findById(mobileCompanyDto.getCompany_id());
+        Optional<MobileCompany> mobileCompany=this.mobileCompanyRepository.findById(mobileCompanyDto.getId());
 	
 		if(mobileCompany.isPresent()) {
 			MobileCompany mobileCompanyUpdate=mobileCompany.get();
@@ -152,14 +152,11 @@ public MobileCompany createMobileCompany(MobileCompanyDto userDto)throws Excepti
 			    userRepository.save(userUpdate);
 			    
 			    mobileCompanyUpdate.setUser(userUpdate);
-			
-
-			
 	          this.mobileCompanyRepository.save(mobileCompanyUpdate);
 	          return mobileCompanyUpdate;
 		}
 		else {
-			throw new RuntimeException("Record not found with id" + mobileCompanyDto.getCompany_id());
+			throw new RuntimeException("Record not found with id" + mobileCompanyDto.getId());
 		}
 	}
 

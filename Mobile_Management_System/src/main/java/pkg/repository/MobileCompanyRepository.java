@@ -8,5 +8,5 @@ import pkg.entity.MobileCompany;
 @Repository
 public interface MobileCompanyRepository extends JpaRepository<MobileCompany, Integer> {
 
-	MobileCompany findByName(String companyname);
+	MobileCompany findByCompanyname(String companyname);
 }

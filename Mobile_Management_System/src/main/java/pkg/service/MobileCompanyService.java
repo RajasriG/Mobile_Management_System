@@ -21,4 +21,9 @@ public interface MobileCompanyService {
 	public void deleteById(int id);
 	
 	public MobileCompany update(MobileCompanyDto mobileCompanyDto);
+
+	List<MobileCompany> findCompanys();
+
+	MobileCompany findCompanyById(int id);
 }
+

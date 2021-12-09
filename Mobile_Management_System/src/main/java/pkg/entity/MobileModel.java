@@ -29,34 +29,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="mobilecompany")
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MobileCompany 
+public class MobileModel 
 {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mobilecompany_sequence")
-	@SequenceGenerator(name = "mobilecompany_sequence", sequenceName = "mobilecompany_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mobilemodel_sequence")
+	@SequenceGenerator(name = "mobilemodel_sequence", sequenceName = "mobilemodel_sequence", allocationSize = 1)
 	
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name="company_name")
-	private String companyname;
+	@Column(name="model_name")
+	private String modelname;
 	
-	@Column(name="company_place")
-	private String companyplace;
-	
-	@Column(name="company_phno")
-	private int companyphno;
-	
-	@Pattern(regexp ="^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$",message="mail id is not valid")
-	@NotEmpty
-	@Column(name="company_email",unique = true)
-	private String companyemail;
-	
+	@Column(name="model_code")
+	private String modecode;
 
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn

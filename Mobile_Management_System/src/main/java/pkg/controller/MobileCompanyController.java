@@ -36,8 +36,8 @@ public class MobileCompanyController {
 	@GetMapping(value="/all")
 	@ResponseStatus(value = HttpStatus.OK)
     public List<MobileCompany>  getAllMobileCompanies() {
-       return this.mobileCompanyService.getAllMobileCompanies(); 
-      
+      return this.mobileCompanyService.getAllMobileCompanies(); 
+		
     }
 	@PostMapping
 	@ResponseStatus(value=HttpStatus.OK)

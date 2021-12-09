@@ -17,6 +17,7 @@ import pkg.entity.Mail;
 import pkg.entity.PasswordGenerator;
 import pkg.entity.MobileCompany;
 import pkg.entity.User;
+import pkg.exception.CustomException;
 import pkg.service.EmailService;
 import pkg.repository.AuthorityRepository;
 import pkg.repository.MobileCompanyRepository;
@@ -53,10 +54,10 @@ public MobileCompany createMobileCompany(MobileCompanyDto userDto)throws Excepti
 		
 		
 		MobileCompany mobileCompanyDto = new MobileCompany();
-		mobileCompanyDto.setCompanyname(userDto.getCompany_name());
-		mobileCompanyDto.setCompanyplace(userDto.getCompany_place());
-		mobileCompanyDto.setCompanyphno(userDto.getCompany_phno());
-		mobileCompanyDto.setCompanyemail(userDto.getCompany_email());
+		mobileCompanyDto.setCompanyname(userDto.getCompanyname());
+		mobileCompanyDto.setCompanyplace(userDto.getCompanyplace());
+		mobileCompanyDto.setCompanyphno(userDto.getCompanyphno());
+		mobileCompanyDto.setCompanyemail(userDto.getCompanyemail());
 		
 		UserDto dto = userDto.getUserDto();
 		User user=new User();
@@ -127,6 +128,10 @@ public MobileCompany createMobileCompany(MobileCompanyDto userDto)throws Excepti
 		}
 		
 	}
+	
+	
+	
+	/*
 	@Override
 	@Transactional
 	public MobileCompany update(MobileCompanyDto mobileCompanyDto) 
@@ -136,19 +141,20 @@ public MobileCompany createMobileCompany(MobileCompanyDto userDto)throws Excepti
 	
 		if(mobileCompany.isPresent()) {
 			MobileCompany mobileCompanyUpdate=mobileCompany.get();
-			mobileCompanyUpdate.setCompanyname(mobileCompanyDto.getCompany_name());
-			mobileCompanyUpdate.setCompanyplace(mobileCompanyDto.getCompany_place());
-			mobileCompanyUpdate.setCompanyphno(mobileCompanyDto.getCompany_phno());
-			mobileCompanyDto.setCompany_email(mobileCompanyDto.getCompany_email());
+			mobileCompanyUpdate.setCompanyname(mobileCompanyDto.getCompanyname());
+			mobileCompanyUpdate.setCompanyplace(mobileCompanyDto.getCompanyplace());
+			mobileCompanyUpdate.setCompanyphno(mobileCompanyDto.getCompanyphno());
+			mobileCompanyUpdate.setCompanyemail(mobileCompanyDto.getCompanyemail());
 	
 				User userUpdate=new User();
 				
 				userUpdate.setId(mobileCompany.get().getUser().getId());
+				userUpdate.setPassword(mobileCompany.get().getUser().getPassword());
 				userUpdate.setUsername(mobileCompany.get().getUser().getUsername());
 				userUpdate.setFirstName(mobileCompany.get().getUser().getFirstName());
 				userUpdate.setLastName(mobileCompany.get().getUser().getLastName());
 				userUpdate.setEmail(mobileCompany.get().getUser().getEmail());
-			   userUpdate.setPassword(mobileCompany.get().getUser().getPassword());
+				
 			    userRepository.save(userUpdate);
 			    
 			    mobileCompanyUpdate.setUser(userUpdate);
@@ -161,3 +167,64 @@ public MobileCompany createMobileCompany(MobileCompanyDto userDto)throws Excepti
 	}
 
 }
+*/
+	@Override
+	@Transactional(readOnly = true)
+	public List<MobileCompany> findCompanys() {
+		
+		return this.mobileCompanyRepository.findAll();
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public MobileCompany findCompanyById(int id) {
+		
+		Optional<MobileCompany> companydb=this.mobileCompanyRepository.findById(id);
+		if(companydb.isPresent()) {
+			return companydb.get();
+		}
+		
+		else {
+			throw  new CustomException("Record not found with id  :" +id);
+		}
+	}
+
+
+	@Override
+	@Transactional
+	public MobileCompany update(MobileCompanyDto companyDto) 
+	{
+	
+        Optional<MobileCompany> companydb=this.mobileCompanyRepository.findById(companyDto.getId());
+	
+
+		
+		if(companydb.isPresent()) {
+			MobileCompany companyUpdate=companydb.get();
+			companyUpdate.setCompanyname(companyDto.getCompanyname());
+			companyUpdate.setCompanyplace(companyDto.getCompanyplace());
+			companyUpdate.setCompanyphno(companyDto.getCompanyphno());		
+				User userUpdate=new User();
+				
+			userUpdate.setId(companydb.get().getUser().getId());
+				
+				userUpdate.setUsername(companydb.get().getUser().getUsername());
+				userUpdate.setFirstName(companydb.get().getUser().getFirstName());
+				userUpdate.setLastName(companydb.get().getUser().getLastName());
+				userUpdate.setEmail(companydb.get().getUser().getEmail());
+			   userUpdate.setPassword(companydb.get().getUser().getPassword());
+			  
+			    userRepository.save(userUpdate);
+			    
+			    companyUpdate.setUser(userUpdate);
+					
+	          this.mobileCompanyRepository.save(companyUpdate);
+	          return companyUpdate;
+		}
+		else {
+			throw new CustomException("Record not found with id" + companyDto.getId());
+		}
+	}
+}
+
+

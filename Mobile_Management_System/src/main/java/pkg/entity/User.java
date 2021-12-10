@@ -35,9 +35,6 @@ import lombok.Setter;
 @Setter
 public class User implements UserDetails, Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 3903243335716548729L;
 	
 	@Id

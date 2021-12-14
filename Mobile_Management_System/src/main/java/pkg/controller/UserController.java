@@ -23,7 +23,6 @@ import pkg.entity.User;
 import pkg.repository.UserRepository;
 import pkg.service.UserDetailsServiceImpl;
 
-
 @RestController
 @RequestMapping("/api")
 public class UserController {

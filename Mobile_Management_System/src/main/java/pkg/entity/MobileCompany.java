@@ -12,7 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
@@ -61,5 +62,10 @@ public class MobileCompany
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn
 	private User user;
+	
+	/*@OneToMany(fetch = FetchType.LAZY)
+	@JoinColumn
+	@JsonIgnore
+	private MobileModel mobilemodel;*/
 
 }

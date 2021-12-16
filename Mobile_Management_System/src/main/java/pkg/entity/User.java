@@ -2,6 +2,7 @@ package pkg.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -61,7 +62,6 @@ public class User implements UserDetails, Serializable {
 	private String email;
 	
 	
-
 	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "user_authority", 
 		joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), 
@@ -90,5 +90,7 @@ public class User implements UserDetails, Serializable {
 	public boolean isEnabled() {
 		return true;
 	}
+
+	
 
 }

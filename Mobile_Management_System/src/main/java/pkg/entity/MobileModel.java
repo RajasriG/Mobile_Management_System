@@ -113,21 +113,29 @@ public class MobileModel
 	@Column(name = "id")
 	private int id;
 	
-	@Column(name="model_name")
+	@Column(name="model_name",unique=true)
 	private String modelname;
 	
 	@Column(name="model_code")
 	private String modelcode;
 
-	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn
+	@JsonIgnore
 	private MobileCompany mobilecompany;
 
-	@OneToOne(fetch = FetchType.LAZY)
+	public void setDistributiondetails(Distributiondetails s) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+/*	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "mobilemodel_distributiondetails", 
 		joinColumns = @JoinColumn(name = "model_id", referencedColumnName = "id"), 
 		inverseJoinColumns = @JoinColumn(name = "distributor_id", referencedColumnName = "id"))
 	@OrderBy
 	@JsonIgnore
-	private Distributiondetails distributiondetails;
+	private Distributiondetails distributiondetails;*/
 }

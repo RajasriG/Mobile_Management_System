@@ -96,8 +96,6 @@ import pkg.entity.MobileModel;
 import pkg.entity.User;
 import pkg.service.MobilemodelService;
 
-
-
 @RestController
 @RequestMapping("/mobilemodel")
 public class MobilemodelController {

@@ -16,6 +16,11 @@ public class UserDto {
     private String password;
     private String email;
     private List<String> role;
+    
+    public void setRole(List<String> role) {
+		this.role = role;
+	}
+    
 	@Override
 	public String toString() {
 		return "UserDto [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", username=" + username

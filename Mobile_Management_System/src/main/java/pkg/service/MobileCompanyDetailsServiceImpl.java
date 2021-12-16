@@ -204,16 +204,23 @@ public MobileCompany createMobileCompany(MobileCompanyDto userDto)throws Excepti
 			companyUpdate.setCompanyname(companyDto.getCompanyname());
 			companyUpdate.setCompanyplace(companyDto.getCompanyplace());
 			companyUpdate.setCompanyphno(companyDto.getCompanyphno());		
-				User userUpdate=new User();
+				
+			User userUpdate=new User();
+			UserDto ss=companyDto.getUserDto();
 				
 			userUpdate.setId(companydb.get().getUser().getId());
-				
 				userUpdate.setUsername(companydb.get().getUser().getUsername());
-				userUpdate.setFirstName(companydb.get().getUser().getFirstName());
-				userUpdate.setLastName(companydb.get().getUser().getLastName());
+				userUpdate.setFirstName(ss.getFirstName());
+				userUpdate.setLastName(ss.getLastName());
 				userUpdate.setEmail(companydb.get().getUser().getEmail());
-			   userUpdate.setPassword(companydb.get().getUser().getPassword());
+				PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
+			      String pass=passwordGenerator.generateRandomPassword(8);
+			      String encodedPassword = passwordEncoder.encode(pass);
+			      System.out.println(pass);
+			      userUpdate.setPassword(encodedPassword);
 			  
+			      userUpdate.setAuthorities(companydb.get().getUser().getAuthorities());
+			      
 			    userRepository.save(userUpdate);
 			    
 			    companyUpdate.setUser(userUpdate);

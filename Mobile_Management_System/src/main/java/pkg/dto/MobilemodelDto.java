@@ -12,8 +12,9 @@ public class MobilemodelDto {
 	private int id;
     private String modelname;
     private String modelcode;
-  
-private void DistributordetailsDto() {
+  private String companyname;
+    private String distributorname;
+private void MobilemodelDto() {
 		
 	}
     

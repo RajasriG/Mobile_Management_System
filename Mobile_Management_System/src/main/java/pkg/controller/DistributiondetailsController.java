@@ -2,6 +2,8 @@ package pkg.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +34,9 @@ public class DistributiondetailsController {
 	@Autowired
 	 private DistributiondetailsService distributiondetailsService; 
 		
-		public DistributiondetailsController(DistributiondetailsService distributiondetailsService) {
+	/*	public DistributiondetailsController(DistributiondetailsService distributiondetailsService) {
 			this.distributiondetailsService = distributiondetailsService;
-		} 
+		} */
 		
 		@GetMapping(value="/all")
 		@ResponseStatus(value = HttpStatus.OK)
@@ -41,18 +44,28 @@ public class DistributiondetailsController {
 	      return this.distributiondetailsService.getAllDistributiondetails(); 
     }
 	
-	@RequestMapping(value="/model",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+		@GetMapping(value="/{id}")
+		public ResponseEntity<Distributiondetails> getDestributiondetailsById(@PathVariable int id) {
+			return ResponseEntity.ok().body(distributiondetailsService.findById(id));
+		}
+		
+	/*@RequestMapping(value="/model",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     public ResponseEntity<Distributiondetails> create(@RequestBody DistributiondetailsDto distributiondetails) throws Exception{
 		distributiondetailsService.create(distributiondetails);
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
-    }
+    }*/
 	
-	@GetMapping(value="/{id}")
-	public ResponseEntity<Distributiondetails> getDestributiondetailsById(@PathVariable int id) {
-		return ResponseEntity.ok().body(distributiondetailsService.findDistributiondetailsById(id));
+	@PostMapping(value = "/save")
+	@ResponseStatus(value = HttpStatus.OK)
+	public ResponseEntity<Distributiondetails> create(@Valid @RequestBody DistributiondetailsDto distributiondetailsDto) throws Exception {
+		System.out.println("post");
+		Distributiondetails distributiondetails = this.distributiondetailsService.create(distributiondetailsDto);
+		return new ResponseEntity<>(distributiondetails, HttpStatus.CREATED);	
 	}
+	
+	
 	
 	@PutMapping(value="/{id}")
 	public ResponseEntity<Distributiondetails> update(@RequestBody DistributiondetailsDto distributiondetails,@PathVariable int id) {

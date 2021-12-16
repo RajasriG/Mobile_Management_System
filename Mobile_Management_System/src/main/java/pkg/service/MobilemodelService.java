@@ -15,25 +15,9 @@ public interface MobilemodelService {
 		
 
 	public 	void deleteById(int id);
+	
+	public List<MobileModel> getAllMobilemodels();
 
 	public MobileModel getmodelById(int id);
 
-	List<MobileModel> getAllMobilemodels();
-
-	List<MobileModel> getAllMobileModels();
-
-	MobileModel findById(int id);
-
-	List<MobileModel> findMobilemodels();
-
-	public MobileModel findModelById(int id);
-
-	MobileModel createMobileModel(MobilemodelDto mobilemodelDto);
-	
-
-	
-
-
-	
-		 
 }

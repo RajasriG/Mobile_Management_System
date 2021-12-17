@@ -71,6 +71,8 @@ public class MobileModel  {
 
 package pkg.entity;
 
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -82,6 +84,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
@@ -118,17 +121,21 @@ public class MobileModel
 	
 	@Column(name="model_code")
 	private String modelcode;
-
+	
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn
 	@JsonIgnore
 	private MobileCompany mobilecompany;
 
-	public void setDistributiondetails(Distributiondetails s) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/*@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "mobilemodel_distributiondetails", 
+		joinColumns = @JoinColumn(name = "model_id", referencedColumnName = "id"), 
+		inverseJoinColumns = @JoinColumn(name = "distributor_id", referencedColumnName = "id"))
+	@OrderBy
+	@JsonIgnore
+	private List<Distributiondetails> distributiondetails;*/
+	
 	
 
 /*	@ManyToMany(fetch = FetchType.LAZY)

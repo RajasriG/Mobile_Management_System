@@ -12,6 +12,7 @@ public class DistributiondetailsDto {
 	private Integer id;
 	private String location;
 	private Long phno;
+	private String modelname;
 	
 	private UserDto userDto;
 	

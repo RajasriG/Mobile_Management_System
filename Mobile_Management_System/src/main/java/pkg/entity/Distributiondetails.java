@@ -115,9 +115,9 @@ public class Distributiondetails
 	@JoinColumn
 	private User user;
 	
-	@ManyToMany(fetch = FetchType.LAZY)
+@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "mobilemodel_distributiondetails", 
-		joinColumns = @JoinColumn(name = "distributor_id", referencedColumnName = "id"), 
+		joinColumns = @JoinColumn(name = "loc_id", referencedColumnName = "id"), 
 		inverseJoinColumns = @JoinColumn(name = "model_id", referencedColumnName = "id"))
 	@OrderBy
 	@JsonIgnore

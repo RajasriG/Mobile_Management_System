@@ -227,9 +227,10 @@ public class MobilemodelDetailsServiceImpl implements MobilemodelService{
 		
 		mm.setMobilecompany(mc);
 		
-		Distributiondetails s=this.distributiondetailsRepository.findByUsername(mobilemodeldto.getDistributorname());
+		//Distributiondetails s=this.distributiondetailsRepository.findByUsername(mobilemodeldto.getDistributorname());
+		/*Distributiondetails s=this.distributiondetailsRepository.findByUsername(mobilemodeldto.getFirstName());
 		
-		mm.setDistributiondetails(s);
+		mm.setDistributiondetails(s);*/
 		
 		
 		return this.mobilemodelRepository.save(mm);

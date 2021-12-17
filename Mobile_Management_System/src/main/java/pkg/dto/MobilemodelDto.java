@@ -13,14 +13,18 @@ public class MobilemodelDto {
     private String modelname;
     private String modelcode;
   private String companyname;
-    private String distributorname;
+    private String firstName;
+    
+    
+  //  private String distributorname;
 private void MobilemodelDto() {
 		
 	}
     
 	@Override
 	public String toString() {
-		return "MobilemodelDto [id=" + id + ", modelname=" + modelname + ", modelcode=" + modelcode + "]";
+		return "MobilemodelDto [id=" + id + ", modelname=" + modelname + ", modelcode=" + modelcode + 
+				", companyname=" + companyname + ", firstName=" + firstName+"]";
 	}
 
 

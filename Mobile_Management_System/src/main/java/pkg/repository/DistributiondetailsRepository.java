@@ -24,6 +24,9 @@ public interface DistributiondetailsRepository extends JpaRepository<Distributio
 	@Query(value="select dd.* from user_info ui join distributiondetails dd on ui.id=dd.user_id where ui.user_name=:user_name",nativeQuery = true)
 	
 	public Distributiondetails findByUsername(@Param("user_name") String list) ;
+	
+/*@Query(value="SELECT m.* FROM distributiondetails d JOIN FETCH d.mobilemodel AS m WHERE m.modelname = :modelname")
+	public MobileModel findByModelname(@Param("modelname") String modelname);*/
 
 }
 

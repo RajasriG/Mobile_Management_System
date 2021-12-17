@@ -33,6 +33,7 @@ import org.springframework.stereotype.Repository;
 
 import pkg.entity.Distributiondetails;
 import pkg.entity.MobileModel;
+import pkg.entity.User;
 
 
 @Repository
@@ -45,6 +46,11 @@ public interface MobilemodelRepository extends JpaRepository<MobileModel, Intege
 @Query(value="select mm.* from mobilemodel mm where mm.model_name=:model_name",nativeQuery = true)
 	
 	public MobileModel findByModelname(@Param("model_name") String list) ;
+
+/*@Query(value="SELECT DISTINCT m FROM mobilemodel m " +
+        "INNER JOIN FETCH m.distributiondetails AS distributiondetails " +
+        "WHERE m.modelname = :modelname")
+public MobileModel findByModelname(@Param("modelname") String modelname);*/
 }
 
 	 	

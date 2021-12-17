@@ -17,6 +17,7 @@ import pkg.entity.Authority;
 import pkg.entity.Distributiondetails;
 import pkg.entity.Mail;
 import pkg.entity.MobileCompany;
+import pkg.entity.MobileModel;
 import pkg.entity.PasswordGenerator;
 import pkg.entity.User;
 import pkg.exception.CustomException;
@@ -136,6 +137,10 @@ public class DistributiondetailsServiceImpl implements  DistributiondetailsServi
 			       emailservice.sendEmail(mail);
 			       d.setUser(user2);
 			      
+			       MobileModel mm=this.mobilemodelRepository.findByModelname(userDto.getModelname());
+			       
+			       d.setMobilemodel(List.of(mm));
+			       
 				return distributiondetailsRepository.save(d);
 			
 	}
@@ -222,8 +227,11 @@ public class DistributiondetailsServiceImpl implements  DistributiondetailsServi
 
 		if(dd.isPresent()) {
 			Distributiondetails Update=dd.get();
-			Update.setLocation(distributiondetailsDto.getLocation());
-			Update.setPhno(distributiondetailsDto.getPhno());
+			
+			Distributiondetails q=new Distributiondetails();
+			
+			q.setLocation(distributiondetailsDto.getLocation());
+			q.setPhno(distributiondetailsDto.getPhno());
 			
 			User userUpdate=new User();
 			UserDto ss=distributiondetailsDto.getUserDto();
@@ -242,10 +250,10 @@ public class DistributiondetailsServiceImpl implements  DistributiondetailsServi
 			      
 			    userRepository.save(userUpdate);
 			    
-			    Update.setUser(userUpdate);
+			    q.setUser(userUpdate);
 					
-	          this.distributiondetailsRepository.save(Update);
-	          return Update;
+	          this.distributiondetailsRepository.save(q);
+	          return q;
 		}
 		else {
 			throw new CustomException("Record not found with id" + distributiondetailsDto.getId());

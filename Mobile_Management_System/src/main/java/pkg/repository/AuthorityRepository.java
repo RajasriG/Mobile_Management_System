@@ -11,9 +11,6 @@ import pkg.entity.Authority;
 
 @Repository
 public interface AuthorityRepository extends JpaRepository<Authority, Long> {
-
-/*	@Query(value = "SELECT * FROM Authority u where u.name = 'ADMIN' " , nativeQuery = true)
-    List<Authority> find(); */
 	
 	@Query(value = "SELECT * FROM Authority u where u.name IN (:roles)", nativeQuery = true)
     List<Authority> find(@Param("roles") List<String> roles);

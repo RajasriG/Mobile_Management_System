@@ -128,46 +128,7 @@ public MobileCompany createMobileCompany(MobileCompanyDto userDto)throws Excepti
 		}
 		
 	}
-	
-	
-	
-	/*
-	@Override
-	@Transactional
-	public MobileCompany update(MobileCompanyDto mobileCompanyDto) 
-	{
-	
-        Optional<MobileCompany> mobileCompany=this.mobileCompanyRepository.findById(mobileCompanyDto.getId());
-	
-		if(mobileCompany.isPresent()) {
-			MobileCompany mobileCompanyUpdate=mobileCompany.get();
-			mobileCompanyUpdate.setCompanyname(mobileCompanyDto.getCompanyname());
-			mobileCompanyUpdate.setCompanyplace(mobileCompanyDto.getCompanyplace());
-			mobileCompanyUpdate.setCompanyphno(mobileCompanyDto.getCompanyphno());
-			mobileCompanyUpdate.setCompanyemail(mobileCompanyDto.getCompanyemail());
-	
-				User userUpdate=new User();
-				
-				userUpdate.setId(mobileCompany.get().getUser().getId());
-				userUpdate.setPassword(mobileCompany.get().getUser().getPassword());
-				userUpdate.setUsername(mobileCompany.get().getUser().getUsername());
-				userUpdate.setFirstName(mobileCompany.get().getUser().getFirstName());
-				userUpdate.setLastName(mobileCompany.get().getUser().getLastName());
-				userUpdate.setEmail(mobileCompany.get().getUser().getEmail());
-				
-			    userRepository.save(userUpdate);
-			    
-			    mobileCompanyUpdate.setUser(userUpdate);
-	          this.mobileCompanyRepository.save(mobileCompanyUpdate);
-	          return mobileCompanyUpdate;
-		}
-		else {
-			throw new RuntimeException("Record not found with id" + mobileCompanyDto.getId());
-		}
-	}
 
-}
-*/
 	@Override
 	@Transactional(readOnly = true)
 	public List<MobileCompany> findCompanys() {
@@ -188,7 +149,6 @@ public MobileCompany createMobileCompany(MobileCompanyDto userDto)throws Excepti
 			throw  new CustomException("Record not found with id  :" +id);
 		}
 	}
-
 
 	@Override
 	@Transactional

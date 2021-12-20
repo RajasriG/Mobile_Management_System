@@ -39,6 +39,11 @@ public class UserController {
         return detailsServiceImpl.getAll();
     }
 	
+	@GetMapping(value="/{id}")
+	public ResponseEntity<User> getUserById(@PathVariable int id) {
+		return ResponseEntity.ok().body(detailsServiceImpl.getUserById(id));
+	}
+	
 	@RequestMapping(value="/user",method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(value = HttpStatus.OK)
     public ResponseEntity<User> create(@RequestBody UserDto user) throws Exception{
@@ -47,24 +52,15 @@ public class UserController {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 	
-	@GetMapping(value="/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable int id) {
-		return ResponseEntity.ok().body(detailsServiceImpl.getUserById(id));
-	}
-	
-	
 	@PutMapping(value="/{id}")
 	public ResponseEntity<User> update(@RequestBody UserDto users,@PathVariable int id) {
 		users.setId(id);
-		//return detailsServiceImpl.update(users);
-		return ResponseEntity.ok().body(detailsServiceImpl.update(users));
-		
+		return ResponseEntity.ok().body(detailsServiceImpl.update(users));		
 		}
 
 	@DeleteMapping("/user/{id}")
 	public HttpStatus deleteById(@PathVariable int id){
 		this.detailsServiceImpl.deleteById(id);
 		return HttpStatus.OK;
-	}
-	
+	}	
 }

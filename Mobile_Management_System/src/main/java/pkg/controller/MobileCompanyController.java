@@ -36,19 +36,28 @@ public class MobileCompanyController {
 	@GetMapping(value="/all")
 	@ResponseStatus(value = HttpStatus.OK)
     public List<MobileCompany>  getAllMobileCompanies() {
-      return this.mobileCompanyService.getAllMobileCompanies(); 
-		
+      return this.mobileCompanyService.getAllMobileCompanies(); 		
     }
+	
+	@GetMapping(value="/{id}")
+	public ResponseEntity<MobileCompany> getUserById(@PathVariable int id) {
+		return ResponseEntity.ok().body(this.mobileCompanyService.findById(id));
+	} 
+	
 	@PostMapping
 	@ResponseStatus(value=HttpStatus.OK)
 	public ResponseEntity<MobileCompany> createMobileCompany(@RequestBody MobileCompanyDto mobileCompanyDto)throws Exception{
 		MobileCompany mobileCompany = this.mobileCompanyService.createMobileCompany(mobileCompanyDto);
 		return new ResponseEntity<>(mobileCompany,HttpStatus.CREATED);
 	}
-	@GetMapping(value="/{id}")
-	public ResponseEntity<MobileCompany> getUserById(@PathVariable int id) {
-		return ResponseEntity.ok().body(this.mobileCompanyService.findById(id));
-	} 
+	
+	@PutMapping(value="/{id}")
+	public ResponseEntity<MobileCompany> update(@RequestBody MobileCompanyDto mobileCompany,@PathVariable int id) {
+		mobileCompany.setId(id);
+		return ResponseEntity.ok().body(mobileCompanyService.update(mobileCompany));
+		
+		}
+	
 	@DeleteMapping(value="/{id}")
 	 @ResponseStatus(value = HttpStatus.OK)
 	 public HttpStatus delete(@PathVariable int id) {
@@ -57,10 +66,4 @@ public class MobileCompanyController {
 			return HttpStatus.OK;
 	        
 	    }
-	@PutMapping(value="/{id}")
-	public ResponseEntity<MobileCompany> update(@RequestBody MobileCompanyDto mobileCompany,@PathVariable int id) {
-		mobileCompany.setId(id);
-		return ResponseEntity.ok().body(mobileCompanyService.update(mobileCompany));
-		
-		}
 }

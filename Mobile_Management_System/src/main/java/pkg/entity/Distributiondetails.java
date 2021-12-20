@@ -122,10 +122,4 @@ public class Distributiondetails
 	@OrderBy
 	@JsonIgnore
 	private List<MobileModel> mobilemodel;
-	
-	/*@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn
-	@JsonIgnore
-	private MobileModel mobilemodel;*/
-
 }

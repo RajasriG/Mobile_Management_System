@@ -50,8 +50,8 @@ public class MobileCompany
 	@Column(name="company_place")
 	private String companyplace;
 	
-	@Column(name="company_phno")
-	private int companyphno;
+	@Column(name="company_phno",unique = true)
+	private Long companyphno;
 	
 	@Pattern(regexp ="^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$",message="mail id is not valid")
 	@NotEmpty
@@ -62,10 +62,5 @@ public class MobileCompany
 	@OneToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn
 	private User user;
-	
-	/*@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn
-	@JsonIgnore
-	private MobileModel mobilemodel;*/
 
 }

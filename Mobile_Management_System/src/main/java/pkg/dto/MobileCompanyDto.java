@@ -11,7 +11,7 @@ public class MobileCompanyDto {
 	private Integer id;
 	private String companyname;
 	private String companyplace;
-	private Integer companyphno;
+	private Long companyphno;
 	private String companyemail;
 	private UserDto userDto;
 

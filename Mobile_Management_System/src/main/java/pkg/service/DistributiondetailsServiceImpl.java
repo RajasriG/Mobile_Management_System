@@ -55,48 +55,6 @@ public class DistributiondetailsServiceImpl implements  DistributiondetailsServi
 		d.setLocation(userDto.getLocation());
 		d.setPhno(userDto.getPhno());
 		
-	/*	UserDto dto = userDto.getUserDto();
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaa"+dto);
-		User user=new User();
-	      user.setFirstName(dto.getFirstName());
-	      user.setLastName(dto.getLastName());
-	      user.setEmail(dto.getEmail());
-	      user.setUsername(dto.getUsername());
-	      PasswordEncoder passwordEncoder = new BCryptPasswordEncoder(); 
-	      String pass=passwordGenerator.generateRandomPassword(8);
-	      String encodedPassword = passwordEncoder.encode(pass);
-	      System.out.println(pass);
-	      user.setPassword(encodedPassword);
-	     
-	      User u2=null;
-	      List<Authority> addAuthorities=authorityRepository.findAll();
-        
-          
-	        String getName=addAuthorities.get(0).getName();
-	        List<String> s4=new ArrayList<String>();
-	        s4.add(getName);
-	        
-	        List<Authority> addAuthoritiess=authorityRepository.find(dto.getRole());
-	       
-	        if(s4.equals(dto.getRole()))
-	        {
-	        	throw new CustomException("this role was not added ");
-	        }
-	        else
-	        {
-          user.setAuthorities(addAuthoritiess);
-         u2= userRepository.save(user);
-	        }
-	          
-          
-	Mail email = new Mail();
-	 email.setSubject("Welcome to mobile Project");
-  email.setToEmail(user.getEmail());
-  email.setContent("user name:"+user.getUsername() +"\n"+ "password :"+pass);
-  emailservice.sendEmail(email);
-   d.setUser(user2);
-   return distributiondetailsRepository.save(d);*/
-		
 		UserDto dto = userDto.getUserDto();
 		User user=new User();
 	      user.setFirstName(dto.getFirstName());
@@ -141,11 +99,8 @@ public class DistributiondetailsServiceImpl implements  DistributiondetailsServi
 			       
 			       d.setMobilemodel(List.of(mm));
 			       
-				return distributiondetailsRepository.save(d);
-			
+				return distributiondetailsRepository.save(d);		
 	}
-	
-	
 	
 	@Override
 	@Transactional
@@ -158,8 +113,7 @@ public class DistributiondetailsServiceImpl implements  DistributiondetailsServi
 		}
 		else {
 			throw new RuntimeException("Record not found with Distributiondetailsid  :" +id);
-		}
-		
+		}	
 	}
 	
 	@Override
@@ -183,41 +137,6 @@ public class DistributiondetailsServiceImpl implements  DistributiondetailsServi
 		}
 	}
 
-
-	/*@Override
-	@Transactional
-	public Distributiondetails update(DistributiondetailsDto distributiondetailsDto) 
-	{	
-       Optional<Distributiondetails> dd1=this.distributiondetailsRepository.findById(distributiondetailsDto.getId());
-			
-		if(dd1.isPresent()) {
-			Distributiondetails update=dd1.get();
-			update.setLocation(distributiondetailsDto.getLocation());
-			update.setPhno(distributiondetailsDto.getPhno());
-			User userUpdate=new User();
-				
-		    UserDto user = distributiondetailsDto.getUserDto();
-		 
-		    userUpdate.setId(dd1.get().getUser().getId());
-			userUpdate.setUsername(dd1.get().getUser().getUsername());
-		    userUpdate.setFirstName(user.getFirstName());
-		   userUpdate.setLastName(user.getLastName());
-		   userUpdate.setEmail(dd1.get().getUser().getEmail());
-		    userUpdate.setPassword(dd1.get().getUser().getPassword());
-		   
-		   
-		    userRepository.save(userUpdate);
-		    
-		   update.setUser(userUpdate);
-				
-          this.distributiondetailsRepository.save(update);
-          return update;
-		}
-		else {
-			throw new CustomException("Record not found with id" + distributiondetailsDto.getId());
-		}
-		
-	}*/
 	@Override
 	@Transactional
 	public Distributiondetails update(DistributiondetailsDto distributiondetailsDto) 
@@ -227,11 +146,8 @@ public class DistributiondetailsServiceImpl implements  DistributiondetailsServi
 
 		if(dd.isPresent()) {
 			Distributiondetails Update=dd.get();
-			
-			Distributiondetails q=new Distributiondetails();
-			
-			q.setLocation(distributiondetailsDto.getLocation());
-			q.setPhno(distributiondetailsDto.getPhno());
+			Update.setLocation(distributiondetailsDto.getLocation());
+			Update.setPhno(distributiondetailsDto.getPhno());
 			
 			User userUpdate=new User();
 			UserDto ss=distributiondetailsDto.getUserDto();
@@ -250,10 +166,10 @@ public class DistributiondetailsServiceImpl implements  DistributiondetailsServi
 			      
 			    userRepository.save(userUpdate);
 			    
-			    q.setUser(userUpdate);
+			    Update.setUser(userUpdate);
 					
-	          this.distributiondetailsRepository.save(q);
-	          return q;
+	          this.distributiondetailsRepository.save(Update);
+	          return Update;
 		}
 		else {
 			throw new CustomException("Record not found with id" + distributiondetailsDto.getId());
